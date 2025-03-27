@@ -1,0 +1,10 @@
+FROM python:3.12
+
+RUN pip install uv
+
+WORKDIR app
+
+COPY uv.lock .
+COPY pyproject.toml .
+
+RUN uv sync --locked --dev

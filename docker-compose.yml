@@ -1,0 +1,66 @@
+# Only for development
+
+services:
+  backend:
+    command: uv run ./manage.py runserver 0.0.0.0:8000
+    build:
+      context: .
+      dockerfile: Dockerfile_develop
+    env_file:
+      - .env
+    ports:
+      - "8012:8000"
+    volumes:
+      - .:/app/
+      - /app/.venv
+    profiles:
+      - backend
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    depends_on:
+      db:
+        condition: service_healthy
+        required: false
+    networks:
+      - default
+
+  db:
+    image: postgres:17.4-alpine
+    environment:
+      PGDATA: /data/postgres
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB}
+      PG_PORT: ${DB_PORT}
+    volumes:
+      - ${DB_MOUNT:-./db/postgres_data}:/data/postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB'" ]
+      interval: 1s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    profiles:
+      - db
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    networks:
+      - default
+
+  cache:
+    image: valkey/valkey:8.1-alpine3.21
+    environment:
+      - VALKEY_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+      - ALLOW_EMPTY_PASSWORD=${VALKEY_ALLOW_EMPTY_PASSWORD}
+    profiles:
+      - valkey
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    networks:
+      - default
+
+
+
+
+
+networks:
+  default:
+    driver: bridge
