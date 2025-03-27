@@ -1,6 +1,8 @@
 ## [0.0.2]
 
 - CI pipline: Lint
+- DRF configuration
+- DRF spectacular
 
 ## [0.0.1] - 26.03.25
 
