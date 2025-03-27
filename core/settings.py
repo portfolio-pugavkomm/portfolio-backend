@@ -13,7 +13,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+import django_stubs_ext
+
 from _version import version
+
+django_stubs_ext.monkeypatch()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +46,10 @@ INSTALLED_APPS = [
     # third party
     "rest_framework",
     "drf_spectacular",
+    "unfold.contrib.forms",
+    "django_filters",
+    # portfolio apps,
+    "apps.publications",
 ]
 
 MIDDLEWARE = [
@@ -149,6 +157,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
 }
 
 SPECTACULAR_SETTINGS = {
