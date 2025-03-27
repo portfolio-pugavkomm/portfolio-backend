@@ -1,0 +1,32 @@
+[project]
+name = "portfolio-backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django-stubs-ext>=5.1.3",
+]
+
+[dependency-groups]
+dev = [
+    "django-stubs>=5.1.3",
+    "mypy>=1.15.0",
+    "mypy-extensions>=1.0.0",
+    "ruff>=0.11.2",
+]
+
+[tool.ruff]
+lint.select = ["E", "F", "I", "C", "B", "DJ"]
+line-length = 120
+show-fixes = true
+cache-dir = "~/.cache/ruff"
+exclude = [".venv"]
+
+[tool.mypy]
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.django-stubs]
+django_settings_module = "core.settings"
