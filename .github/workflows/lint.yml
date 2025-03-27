@@ -1,0 +1,19 @@
+name: Lint
+
+on:
+  workflow_call:
+
+jobs:
+  lint-mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install uv package manager
+        run: pip install uv
+      - name: Uv sync
+        run: uv sync --locked --extra=dev
+      - name: Run mypy
+        run: uv run mypy .
