@@ -25,6 +25,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Publications
     path(API_PREFIX + "publications/", include("apps.publications.urls")),
+    # Education
+    path(API_PREFIX + "education/", include("apps.education.urls")),
     # API documentation
     path(API_PREFIX + "openapi-schema/", SpectacularAPIView.as_view(), name="schema"),
     path(API_PREFIX + "openapi-schema/swagger/", SpectacularSwaggerView.as_view(), name="openapi-swagger"),
