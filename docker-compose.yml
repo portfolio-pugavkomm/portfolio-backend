@@ -52,14 +52,12 @@ services:
       - VALKEY_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
       - ALLOW_EMPTY_PASSWORD=${VALKEY_ALLOW_EMPTY_PASSWORD}
     profiles:
-      - valkey
+      - cache
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     networks:
       - default
-
-
-
-
+    ports:
+      - "${CACHE_PORT}:${CACHE_PORT}"
 
 networks:
   default:
