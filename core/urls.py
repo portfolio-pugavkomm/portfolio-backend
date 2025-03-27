@@ -23,10 +23,7 @@ API_PREFIX = "api/v1/"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-]
-
-# API documentation
-urlpatterns += [
+    # API documentation
     path(API_PREFIX + "openapi-schema/", SpectacularAPIView.as_view(), name="schema"),
     path(API_PREFIX + "openapi-schema/swagger/", SpectacularSwaggerView.as_view(), name="openapi-swagger"),
     path(API_PREFIX + "openapi-schema/redoc/", SpectacularRedocView.as_view(), name="openapi-redoc"),
