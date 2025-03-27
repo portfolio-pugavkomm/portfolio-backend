@@ -1,7 +1,7 @@
 name: Test backend with unitest
 
 on:
-  workflow_run:
+  workflow_call:
 
 
 jobs:
