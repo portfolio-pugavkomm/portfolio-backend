@@ -17,7 +17,17 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+
+API_PREFIX = "api/v1/"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+]
+
+# API documentation
+urlpatterns += [
+    path(API_PREFIX + "openapi-schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(API_PREFIX + "openapi-schema/swagger/", SpectacularSwaggerView.as_view(), name="openapi-swagger"),
+    path(API_PREFIX + "openapi-schema/redoc/", SpectacularRedocView.as_view(), name="openapi-redoc"),
 ]
