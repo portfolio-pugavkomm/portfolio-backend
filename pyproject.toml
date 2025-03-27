@@ -10,7 +10,9 @@ dependencies = [
     "django-unfold>=0.53.0",
     "django-valkey>=0.2.1",
     "djangorestframework>=3.15.2",
+    "drf-spectacular>=0.28.0",
     "psycopg[binary,pool]>=3.2.6",
+    "toml>=0.10.2",
 ]
 
 [dependency-groups]
