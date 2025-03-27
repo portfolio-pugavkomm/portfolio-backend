@@ -3,6 +3,8 @@
 - CI pipline: Lint
 - DRF configuration
 - DRF spectacular
+- Publications application:
+  - Get publications list
 
 ## [0.0.1] - 26.03.25
 
