@@ -1,0 +1,1 @@
+EDUCATION_TAG = "Education"
